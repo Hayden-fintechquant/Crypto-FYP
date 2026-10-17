@@ -1,7 +1,7 @@
 # ============================================================
 # 預先登記設定檔 (pre-registration config)
-# 在看到任何真實因子結果「之前」填好，然後執行:  python run_all.py --lock
-# 鎖定之後，正式執行 (python run_all.py) 會檢查這個檔案有沒有被改過。
+# 在看到任何真實因子結果「之前」填好，然後執行:  python run_fyp1.py --lock
+# 鎖定之後，正式執行 (python run_fyp1.py) 會檢查這個檔案有沒有被改過。
 # ============================================================
 data:
   panel_path: data/panel.csv          # B 的 panel: date,coin_id,close,volume_usd,mcap (其他欄位可有可無)

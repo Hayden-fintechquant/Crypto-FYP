@@ -1,4 +1,4 @@
-"""預先登記鎖: 把 config.yaml 的雜湊值存起來，之後正式執行時檢查有沒有被改過。"""
+"""預先登記鎖: 把 config_fyp1.yaml 的雜湊值存起來，之後正式執行時檢查有沒有被改過。"""
 import hashlib, json, datetime
 import yaml
 

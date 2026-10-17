@@ -2,10 +2,10 @@
 """Student A 一條龍: 資料 -> 因子 -> 篩選 -> IC/分組 -> Fama-MacBeth -> 訊號組合 -> BL 先驗 -> 稽核。
 
 用法:
-  python run_all.py --synthetic     # 用假資料測試整條流程(隨時可跑)
-  python run_all.py --lock          # 填好 config.yaml 後，鎖定預先登記 (之後不可再改門檻)
-  python run_all.py --dev           # 用真實資料測試程式 (結果放 results_dev/，不算正式結果)
-  python run_all.py                 # 正式執行 (必須先 --lock，且 config 沒被改過)
+  python run_fyp1.py --synthetic     # 用假資料測試整條流程(隨時可跑)
+  python run_fyp1.py --lock          # 填好 config_fyp1.yaml 後，鎖定預先登記 (之後不可再改門檻)
+  python run_fyp1.py --dev           # 用真實資料測試程式 (結果放 results_dev/，不算正式結果)
+  python run_fyp1.py                 # 正式執行 (必須先 --lock，且 config 沒被改過)
 """
 import argparse, os, sys, shutil
 import yaml
@@ -17,7 +17,7 @@ from src.audit import lookahead_audit
 from src.bl import weekly_prior
 from src import prereg
 
-CFG = "config.yaml"
+CFG = "config_fyp1.yaml"
 LOCK = "prereg.lock"
 
 
@@ -33,7 +33,7 @@ def main():
     if a.lock:
         info = prereg.lock(CFG, LOCK)
         print(f"已鎖定預先登記。sha256={info['sha256'][:16]}...  時間(UTC)={info['locked_at_utc']}")
-        print("提醒: 鎖定之後如果還要改 config.yaml，必須重新 --lock，並在報告中說明原因。")
+        print("提醒: 鎖定之後如果還要改 config_fyp1.yaml，必須重新 --lock，並在報告中說明原因。")
         return
 
     cfg = yaml.safe_load(open(CFG, encoding="utf-8"))
@@ -58,7 +58,7 @@ def main():
             mode, out = "OFFICIAL", "results"
         for key in ("panel_path", "universe_path"):
             if not os.path.exists(cfg["data"][key]):
-                print(f"找不到 {cfg['data'][key]}。請把 B 的檔案放進 data/ 資料夾 (檔名見 config.yaml 的 data 區塊)。")
+                print(f"找不到 {cfg['data'][key]}。請把 B 的檔案放進 data/ 資料夾 (檔名見 config_fyp1.yaml 的 data 區塊)。")
                 sys.exit(1)
         panel, universe = load_panel(cfg["data"]["panel_path"]), load_universe(cfg["data"]["universe_path"])
         if cfg["sample"]["end"] and panel["date"].max() > pd.Timestamp(cfg["sample"]["end"]):

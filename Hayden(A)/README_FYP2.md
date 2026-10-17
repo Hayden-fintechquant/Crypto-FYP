@@ -7,7 +7,7 @@
 | 指令 | 用途 |
 |---|---|
 | `python run_fyp2.py all --synthetic` | 用假資料跑完 forecast + bl + risk + evaluate (示範) |
-| `python run_fyp2.py --lock` | 鎖定 `config_fyp2.yaml` (預先登記)。要先 `python run_all.py --lock` 鎖好 FYP I |
+| `python run_fyp2.py --lock` | 鎖定 `config_fyp2.yaml` (預先登記)。要先 `python run_fyp1.py --lock` 鎖好 FYP I |
 | `python run_fyp2.py all --dev` | 真實資料測試程式 (盲測：不輸出樣本外績效) |
 | `python run_fyp2.py all` | 正式：預測 → BL → 風險模型 (兩個鎖都要通過) |
 | `python run_fyp2.py evaluate --returns C的weekly_log.csv` | 評估 C 跑出來的回測 |
@@ -52,7 +52,7 @@
 
 ## 這些事程式「不會」幫你做
 1. **決定特徵與格網並預先登記。** `forecast.include_mu_features`、超參數格網 (預設 8 組)、`trust_grid` 都是我的建議值。
-2. **加入鏈上因子。** 需要 B 的覆蓋報告與資料。做法：在 `src/factors.py` 的 `raw_factor_wide` 新增因子名稱的解析規則，再把名稱加進 `config.yaml` 的 `factors` 清單 (注意：候選因子清單一旦鎖定就不能再增加；多一個因子，多重檢定的 `n_specs` 也會增加)。
+2. **加入鏈上因子。** 需要 B 的覆蓋報告與資料。做法：在 `src/factors.py` 的 `raw_factor_wide` 新增因子名稱的解析規則，再把名稱加進 `config_fyp1.yaml` 的 `factors` 清單 (注意：候選因子清單一旦鎖定就不能再增加；多一個因子，多重檢定的 `n_specs` 也會增加)。
 3. **決定風險模型的負責人。** 你們的計畫表沒有寫誰負責。
 4. **與 C 的最佳化器整合與 FYP II 的完整回測**，以及所有結果的解讀與寫作。
 

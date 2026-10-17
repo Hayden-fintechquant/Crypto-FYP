@@ -24,7 +24,7 @@ from src.bl import iter_weekly_inputs
 from src.factors import forward_return_wide
 from src.evaluate import full_evaluation
 
-CFG1, CFG2 = "config.yaml", "config_fyp2.yaml"
+CFG1, CFG2 = "config_fyp1.yaml", "config_fyp2.yaml"
 LOCK1, LOCK2 = "prereg.lock", "prereg_fyp2.lock"
 pd.set_option("display.width", 200, "display.float_format", lambda x: f"{x:,.4f}")
 
@@ -162,7 +162,7 @@ def main():
         if a.stage != "evaluate":
             for key in ("panel_path", "universe_path"):
                 if not os.path.exists(cfg1["data"][key]):
-                    sys.exit(f"找不到 {cfg1['data'][key]}。請把 B 的檔案放進 data/ (見 config.yaml)")
+                    sys.exit(f"找不到 {cfg1['data'][key]}。請把 B 的檔案放進 data/ (見 config_fyp1.yaml)")
             panel, universe = load_panel(cfg1["data"]["panel_path"]), load_universe(cfg1["data"]["universe_path"])
     blind = (mode == "DEV" and not a.unblind)
     os.makedirs(out, exist_ok=True)

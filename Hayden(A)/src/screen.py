@@ -1,5 +1,5 @@
 """篩選流程: 覆蓋率 -> 完整樣本 -> 縮尾與標準化 -> 最少幣數 -> 冗餘剔除。
-所有門檻都來自 config.yaml (事前固定)。"""
+所有門檻都來自 config_fyp1.yaml (事前固定)。"""
 import numpy as np
 import pandas as pd
 from .fama_macbeth import fm_univariate
