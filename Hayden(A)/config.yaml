@@ -1,0 +1,63 @@
+# ============================================================
+# 預先登記設定檔 (pre-registration config)
+# 在看到任何真實因子結果「之前」填好，然後執行:  python run_all.py --lock
+# 鎖定之後，正式執行 (python run_all.py) 會檢查這個檔案有沒有被改過。
+# ============================================================
+data:
+  panel_path: data/panel.csv          # B 的 panel: date,coin_id,close,volume_usd,mcap (其他欄位可有可無)
+  universe_path: data/universe.csv    # B 的 universe: rebalance_date,coin_id,is_member (rank,mcap 可有可無)
+
+timing:
+  # v0/v1 的 rebalance_date 是「週一」：用週日(=日期-1天)收盤前的資料，週一起持有一週
+  # 如果 B 之後把 rebalance_date 改成週日，這裡改成 0
+  info_cutoff_offset_days: 1
+  horizon_days: 7                     # 預測期 = 再平衡間隔 = 1 週
+  delist_policy: last_price           # 持有期間幣消失: last_price(最後成交價) | minus_100(-100%) | drop(丟掉)
+
+sample:
+  start: "2020-09-21"                 # 因子樣本起點 (universe 達到 30 個幣的第一週)
+  end: "2026-09-29"                   # 最後一個完整日
+
+factors:                              # 候選因子清單(也是「冗餘時保留順序」的優先順序)。寫定後不可再增加
+  - size                              # log(市值)
+  - mom_2w                            # 過去 2 週報酬
+  - mom_4w                            # 過去 4 週報酬
+  - rev_1w                            # 短期反轉 = -(過去 1 週報酬)
+  - vol_28d                           # 過去 28 天日報酬標準差
+  - liq_28d                           # log(過去 28 天平均日成交額)
+# 可選: amihud_28d (Amihud 非流動性)
+
+screening:
+  min_days_since_listing: 30          # 上線(第一筆資料)後 30 天內不納入
+  min_cross_section: 30               # 每週至少 30 個幣，否則該週整週丟掉
+  min_factor_coverage: 0.80           # 因子在合格幣週中的覆蓋率 < 80% 就淘汰
+  winsor_pct: [0.01, 0.99]            # 每週橫截面縮尾
+  standardize: zscore                 # zscore | rank
+  redundancy_corr_cutoff: 0.8         # |相關| > 0.8 → 優先順序在後的因子被淘汰
+
+validation:
+  nw_lags: auto                       # Newey-West 落後期: auto = floor(4*(T/100)^(2/9))
+  rolling_ic_weeks: 52
+  n_quantiles: 5
+  spanning_controls: [size, mom_4w]   # 檢驗其他因子在控制「市場(截距)、規模、動能」後是否還有溢酬
+  verdict:                            # 判定門檻(事前固定)
+    alpha: 0.05
+    min_abs_t: 2.0
+    min_abs_monotonicity: 0.8
+
+combination:
+  sign_mode: rolling_ic               # rolling_ic(只用過去的 IC 決定正負號) | config(用下面 expected_sign)
+  expected_sign: {}                   # 例: {size: -1, mom_4w: 1}，sign_mode: config 時使用
+  min_history_weeks: 52               # 至少 52 週歷史才開始產生預期報酬
+  fm_window_weeks: 52                 # 滾動 Fama-MacBeth 溢酬窗口
+  calibration: grinold                # 分數轉成報酬單位: mu = IC × 橫截面報酬波動 × 分數
+
+black_litterman:
+  cov_window_days: 180
+  min_history_days: 90
+  shrinkage: ledoit_wolf              # ledoit_wolf | sample
+  delta_mode: fixed                   # fixed | market
+  delta: 2.5                          # 風險厭惡係數 (delta_mode: fixed)
+  risk_free_weekly: 0.0               # 無風險利率(每週)，基準情境 0
+  tau: 0.05
+  trust: 1.0                          # 信任係數: Omega = diag(P tau Sigma P') / trust
