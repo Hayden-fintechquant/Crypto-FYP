@@ -1,7 +1,0 @@
-{
-    "python.testing.pytestArgs": [
-        "Hayden(A)"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
-}

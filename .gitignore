@@ -218,3 +218,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# ===== 本專案 =====
+.DS_Store
+
+# 資料檔（放雲端，不放 GitHub）
+*.csv
+*.parquet
+
+# 執行結果
+results/
+results_dev/
+results_synthetic/
+data_synth/
