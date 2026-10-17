@@ -1,0 +1,53 @@
+# ============================================================
+# FYP II 預先登記設定檔。FYP I 的 config.yaml 仍然負責資料、因子與篩選。
+# 在看到任何 FYP II 的樣本外結果「之前」填好，然後:  python run_fyp2.py --lock
+# ============================================================
+cv:                                   # 清除與禁運的 expanding walk-forward
+  min_train_weeks: 156                # 最短訓練窗口 3 年
+  test_weeks: 26                      # 每個測試區塊 26 週
+  purge_weeks: 2                      # 訓練集尾端清除 2 週 (必須 >= horizon_weeks)
+  embargo_weeks: 2
+  horizon_weeks: 1
+
+forecast:
+  quantiles: [0.1, 0.5, 0.9]
+  target: demeaned                    # demeaned: 預測「相對於同週平均」的報酬，適合相對 view | raw
+  include_mu_features: false          # 是否把 FYP I 的 mu (ew/icir/fm) 也當特徵
+  backend: auto                       # auto: 有 xgboost 就用，否則退回 sklearn
+  seed: 0
+  tune: true                          # 只在每個 fold 的訓練視窗「內部」調參
+  inner_val_weeks: 26
+  calibration: cqr                    # cqr: 保形校準 | none
+  calib_weeks: 26
+  target_coverage: 0.80               # [q10, q90] 的目標涵蓋率
+  grid:                               # 小格網: 2 x 2 x 2 = 8 組 (= 宣告的嘗試次數)
+    max_depth: [2, 3]
+    n_estimators: [100, 250]
+    learning_rate: [0.05, 0.1]
+
+bl_views:
+  trust_grid: [0.01, 0.1, 1.0, 10.0, 100.0]     # 信任參數敏感度分析
+  base_trust: 1.0                               # 主要結果使用的信任參數
+
+risk:
+  methods: [sample, ledoit_wolf, garch_sample, garch_lw, garch_pca]
+  default_method: garch_pca           # 盲測(--dev)時使用；正式執行依 selection_metric 選
+  selection_metric: qlike_mean        # 越低越好: qlike_mean | gmv_vol_ann | bias_stat(離 1 最近)
+  refit_every_weeks: 13
+  garch_min_obs: 250                  # 少於此天數的幣改用 EWMA
+  garch_max_window_days: 1095
+  pca_components: 3
+  eval_cap: 0.10                      # 評估用最小變異組合的單幣上限
+  n_random_portfolios: 20
+
+evaluation:
+  returns_path: ../C/results/weekly_log.csv      # C 的 weekly_log.csv (date, allocator, net_ret, ...)
+  benchmark: equal_weight                        # 要擊敗的基準 (allocator 名稱)
+  extra_trials: 8                                # weekly_log 以外試過的設定數 (預測層超參數 8 組)
+  rf_weekly: 0.0
+  es_level: 0.05
+  bootstrap: {n: 2000, block: 4, seed: 0}
+  stress:
+    COVID: ["2020-02-15", "2020-04-15"]
+    Luna: ["2022-05-01", "2022-05-31"]
+    FTX: ["2022-11-01", "2022-11-30"]

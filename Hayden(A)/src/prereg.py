@@ -23,8 +23,8 @@ def verify(cfg_path, lock_path):
         with open(lock_path, encoding="utf-8") as f:
             info = json.load(f)
     except FileNotFoundError:
-        return False, "找不到 prereg.lock，請先執行: python run_all.py --lock", None
+        return False, f"找不到 {lock_path}，請先鎖定設定檔 (--lock)", None
     h = config_hash(cfg_path)
     if h != info["sha256"]:
-        return False, "config.yaml 在鎖定之後被修改過! 不能做正式執行。", info
+        return False, f"{cfg_path} 在鎖定之後被修改過! 不能做正式執行 (要改請重新 --lock 並在報告說明原因)。", info
     return True, "預先登記檢查通過", info

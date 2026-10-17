@@ -1,5 +1,7 @@
 # Student A 程式包：因子驗證 → 訊號組合 → Black-Litterman 先驗
 
+> **FYP II (預測層、BL 整合、風險模型、評估套件) 的說明在 `README_FYP2.md`。** 本檔只談 FYP I。
+
 你只要：**① 把 B 的兩個檔案放進 `data/`　② 填好 `config.yaml` 並鎖定　③ 執行 `python run_all.py`**。
 其餘（因子計算、篩選、IC/ICIR、五分位、Fama-MacBeth、Newey-West、多重檢定、三種訊號組合、預期報酬校準、BL 反向最佳化、前視稽核）都已寫好，並用合成資料測試過。
 
@@ -26,7 +28,7 @@ pip install -r requirements.txt
 | `python run_all.py --synthetic` | 用假資料跑完整流程（內建一個已知訊號: `liq_28d`），隨時可以檢查程式沒壞 |
 | `python run_all.py --dev` | 用真實資料（例如 B 的 v0.1）**測試程式有沒有報錯**。盲測：不輸出因子績效，避免鎖定前偷看結果 |
 | `python run_all.py --lock` | 鎖定 `config.yaml` |
-| `python -m pytest tests` | 跑 14 個自動測試（約 1～2 分鐘） |
+| `python -m pytest tests` | 跑 36 個自動測試 (FYP I 14 個 + FYP II 22 個，約 1～2 分鐘) |
 
 ## 輸入檔格式
 - `panel.csv`：`date, coin_id, close, volume_usd, mcap`（其他欄位會被忽略）。日期是 UTC 日，`close` 是該日收盤。

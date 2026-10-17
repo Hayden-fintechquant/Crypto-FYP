@@ -54,15 +54,15 @@ def relative_views(mu, w_mkt):
     return P, P @ np.asarray(mu)
 
 
-def weekly_prior(m, universe: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """每個再平衡日: 市值權重 w_mkt、隱含均衡報酬 pi (週報酬單位)。交給 C 的 BL 基準使用。"""
-    universe = universe.assign(is_member=universe["is_member"].astype(int) > 0)   # 0/1 或 True/False 都可以
+def iter_weekly_inputs(m, universe: pd.DataFrame, cfg: dict, return_window: bool = False):
+    """每個再平衡日產生一組 (date, 幣清單, 市值權重 w, 週共變異數 Sigma, delta)。
+    先驗(weekly_prior)與 FYP II 的後驗(bl_integration)共用，確保兩者用同一份共變異數。"""
+    universe = universe.assign(is_member=universe["is_member"].astype(int) > 0)
     b, off = cfg["black_litterman"], pd.Timedelta(days=int(cfg["timing"]["info_cutoff_offset_days"]))
     reb = pd.DatetimeIndex(sorted(universe["rebalance_date"].unique()))
     reb = reb[(reb >= pd.Timestamp(cfg["sample"]["start"])) & (reb <= pd.Timestamp(cfg["sample"]["end"]))]
     cov_fn = ledoit_wolf_cov if b["shrinkage"] == "ledoit_wolf" else sample_cov
     mem = universe[universe["is_member"]].groupby("rebalance_date")["coin_id"].apply(set)
-    rows = []
     for t in reb:
         c = t - off
         if c not in m.close.index or t not in mem.index:
@@ -79,6 +79,16 @@ def weekly_prior(m, universe: pd.DataFrame, cfg: dict) -> pd.DataFrame:
         cap = m.mcap.loc[c, ok].values.astype(float)
         w = cap / cap.sum()
         delta = b["delta"] if b["delta_mode"] == "fixed" else market_delta(7 * (R.values @ w), b["risk_free_weekly"])
+        if return_window:
+            yield t, ok, w, Sigma, delta, R, c
+        else:
+            yield t, ok, w, Sigma, delta
+
+
+def weekly_prior(m, universe: pd.DataFrame, cfg: dict) -> pd.DataFrame:
+    """每個再平衡日: 市值權重 w_mkt、隱含均衡報酬 pi (週報酬單位)。交給 C 的 BL 基準使用。"""
+    rows = []
+    for t, ok, w, Sigma, delta in iter_weekly_inputs(m, universe, cfg):
         pi = implied_returns(Sigma, w, delta)
         for k, wk, pk in zip(ok, w, pi):
             rows.append((t, k, wk, pk, delta))
