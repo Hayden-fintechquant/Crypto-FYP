@@ -1,0 +1,8 @@
+step,rows_removed,detail
+drop_null_date_or_coin,0,bad_dates=0
+clip_sample_window,0,2018-01-01..2026-09-30
+dedupe_date_coin,0,dup_flags=0
+drop_nonpositive_close,0,
+fix_high_lt_low,0,fixed=0
+flag_extreme_returns_gt_50pct,0,flagged=63
+flag_nonpositive_mcap,0,flagged=8446
