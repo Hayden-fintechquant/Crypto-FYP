@@ -1,0 +1,11 @@
+metric,economic_rationale,covers_full_candidate_universe,decision,free_source_checked,available_btc,available_eth,available_typical_alt,comment
+ohlcv_daily,Prices and volume for returns/vol/liquidity factors,yes,price_input_ready,Binance public klines,yes,yes,yes,Already in ohlcv_panel_v1 / price_mcap_panel_v0
+market_cap,Size factor + historical top 30-50 ranks,yes,price_input_ready,CoinGecko Demo 365d + approx fill,yes,yes,yes,api last ~365d; earlier approx=close*latest supply — disclose to A/C
+active_addresses,Network usage / adoption,no,btc_eth_timing,Coin Metrics Community API v4,yes,yes,partial,Coin Metrics Community API (2026-10-31 re-check): 69/237 ever-universe members have BOTH AdrActCnt+TxCnt (29.1%). Mapped 71/237. Spot-check timeseries rows=16. Does NOT clear full-candidate-universe gate → keep btc_eth_timing.
+tx_count,On-chain activity,no,btc_eth_timing,Coin Metrics Community API v4,yes,yes,partial,Coin Metrics Community API (2026-10-31 re-check): 69/237 ever-universe members have BOTH AdrActCnt+TxCnt (29.1%). Mapped 71/237. Spot-check timeseries rows=16. Does NOT clear full-candidate-universe gate → keep btc_eth_timing.
+nvt,Valuation vs on-chain transfer volume,no,btc_eth_timing,Glassnode-style free charts (BTC/ETH),yes,partial,no,Needs transfer value history; free access skewed to BTC/ETH
+exchange_net_flow,Coins moving onto/off exchanges,no,btc_eth_timing,CryptoQuant/Glassnode free (limited assets),yes,yes,no_or_paid,Free tier rarely covers full top-50 cross-section history
+realised_cap,Cost-basis network valuation,no,btc_timing_only,BTC-focused on-chain analytics free charts,yes,partial,no,Classic BTC metric; treat as Bitcoin regime/timing per report gate
+mvrv,Market value / realised value,no,btc_timing_only,BTC free charts (Glassnode etc.),yes,partial,no,Report example of BTC-only style signal
+sopr,Spent-output profit ratio / holder PnL behaviour,no,btc_timing_only,BTC free charts,yes,no_or_paid,no,Primarily BTC in free sources
+sth_lth_cost_basis,Short/long-term holder cost basis,no,btc_timing_only,BTC free charts,yes,no_or_paid,no,Report explicitly lists as BTC-only style metrics
