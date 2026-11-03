@@ -1,0 +1,234 @@
+coin_id,symbol,successor_id,successor_symbol,migration_date,first_trade_date,last_trade_date,end_reason,notes
+0x,ZRX,,,,2019-02-28,2026-09-29,still_trading,
+999-coin,999,,,,2019-12-08,2020-02-01,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+aave,LEND,,,,2020-05-15,2020-10-12,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+abbc-coin,ABBC,,,,2019-03-03,2021-01-23,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+acash-coin,ACA,,,,2022-01-25,2026-02-13,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+aeternity,AE,,,,2018-01-07,2020-02-15,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+algorand,ALGO,,,,2019-06-22,2026-09-29,still_trading,
+amp,AMP,,,,2021-11-23,2026-09-29,still_trading,
+ampleforth,AMPL,,,,2020-07-12,2021-02-13,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+apecoin-ape,APE,,,,2022-03-17,2026-09-29,still_trading,
+aptos,APT,,,,2022-10-19,2026-09-29,still_trading,
+arbitrum,ARB,,,,2023-03-23,2026-09-29,still_trading,
+ardor,ARDR,,,,2020-05-15,2026-07-10,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+artificial-superintelligence-alliance,FET,,,,2019-02-28,2026-09-29,still_trading,
+arweave,AR,,,,2021-05-14,2026-09-29,still_trading,
+aster,ASTER,,,,2025-10-06,2026-09-29,still_trading,
+audiera,BEAT,,,,2025-12-21,2026-08-15,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+augur,REP,,,,2020-06-12,2022-12-22,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+aurora,AOA,,,,2018-08-05,2020-07-25,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+avalanche-2,AVAX,,,,2020-09-22,2026-09-29,still_trading,
+axie-infinity,AXS,,,,2020-11-04,2026-09-29,still_trading,
+baer-chain,BRC,,,,2020-03-08,2020-05-02,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+basic-attention-token,BAT,,,,2019-03-04,2026-09-29,still_trading,
+binancecoin,BNB,,,,2018-01-01,2026-09-29,still_trading,
+bitcoin,BTC,,,,2018-01-01,2026-09-29,still_trading,
+bitcoin-cash,BCH,,,,2019-11-28,2026-09-29,still_trading,
+bitcoin-diamond,BCD,,,,2018-03-25,2021-05-15,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitcoin-gold,BTG,,,,2021-04-16,2022-10-24,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitcoin-private,BTCP,,,,2018-04-15,2019-01-05,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitcoin-sv,BSV,,,,2018-12-02,2026-09-29,still_trading,
+bitcoinpos,BPS,,,,2020-07-26,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitconnect,BCC,,,,2018-01-01,2018-11-20,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitdao,BIT,,,,2022-10-23,2023-07-29,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bitget-token-new,BGB,,,,2023-09-24,2026-09-29,still_trading,
+bitshares,BTS,,,,2020-02-06,2023-12-07,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bittensor,TAO,,,,2024-04-11,2026-09-29,still_trading,
+bittorrent,BTT,,,,2022-01-25,2026-09-29,still_trading,
+bonk1,BONK,,,,2023-12-15,2026-09-29,still_trading,
+bytecoin-bcn,BCN,,,,2018-01-07,2020-03-21,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+bytom,BTM,,,,2018-01-07,2020-11-07,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+canton-network,CC,,,,2025-11-16,2026-09-29,still_trading,
+cardano,ADA,,,,2018-04-17,2026-09-29,still_trading,
+celestia,TIA,,,,2023-10-31,2026-09-29,still_trading,
+celo,CELO,,,,2021-01-05,2026-09-29,still_trading,
+celsius,CEL,,,,2020-06-28,2022-10-08,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+centrality,CENNZ,,,,2018-04-08,2020-04-04,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+chain,XCN,,,,2022-10-23,2023-01-14,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+chainlink,LINK,,,,2019-01-16,2026-09-29,still_trading,
+chiliz,CHZ,,,,2019-09-06,2026-09-29,still_trading,
+compound,COMP,,,,2020-06-25,2026-09-29,still_trading,
+conflux-network,CFX,,,,2021-03-29,2026-09-29,still_trading,
+cosmos,ATOM,,,,2019-04-29,2026-09-29,still_trading,
+counos-x,CCXX,,,,2020-05-03,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+cronos,CRO,,,,2022-02-27,2026-09-29,still_trading,
+crypto-com-coin,CRO,,,,2018-12-23,2022-02-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+curve-dao-token,CRV,,,,2020-08-15,2026-09-29,still_trading,
+dash,DASH,,,,2019-03-28,2026-09-29,still_trading,
+decentraland,MANA,,,,2020-08-06,2026-09-29,still_trading,
+decred,DCR,,,,2020-07-30,2026-09-29,still_trading,
+dentacoin,DCN,,,,2018-01-07,2019-02-02,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+dexe,DEXE,,,,2021-07-23,2026-09-29,still_trading,
+digibyte,DGB,,,,2020-07-20,2026-09-29,still_trading,
+digixdao,DGD,,,,2018-01-07,2020-05-16,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+dogecoin,DOGE,,,,2019-07-05,2026-09-29,still_trading,
+dogwifhat,WIF,,,,2024-03-05,2026-09-29,still_trading,
+ecash,XEC,,,,2021-09-03,2026-09-29,still_trading,
+edc-blockchain,EDC,,,,2020-03-29,2020-04-11,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+educare,EKT,,,,2019-06-23,2020-01-04,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+egretia,EGT,,,,2019-06-16,2019-09-07,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+elamachain,ELAMA,,,,2020-03-29,2020-07-04,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+electroneum,ETN,,,,2018-01-07,2020-06-13,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+elrond-erd-2,EGLD,,,,2020-09-03,2026-09-29,still_trading,
+enjin-coin,ENJ,,,,2019-04-18,2026-09-29,still_trading,
+eos,EOS,,,,2018-05-28,2025-05-26,source_truncated,source_truncated = exchange/source delist (delisted_from_binance / listing end). Panel stops ~2025-05-26; not a collapse.
+ethena,ENA,,,,2024-04-02,2026-09-29,still_trading,
+ethereum,ETH,,,,2018-01-01,2026-09-29,still_trading,
+ethereum-classic,ETC,,,,2018-06-12,2026-09-29,still_trading,
+factom,FCT,,,,2018-01-07,2019-06-08,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+fantom,FTM,sonic-3,S,2025-01-13,2019-06-11,2025-01-13,migrated,Fantom Opera -> Sonic (S); Hayden will splice returns.
+fetch,FET,,,,2019-02-28,2026-09-29,still_trading,
+filecoin,FIL,,,,2020-10-15,2026-09-29,still_trading,
+floki-inu,FLOKI,,,,2023-05-05,2026-09-29,still_trading,
+flow,FLOW,,,,2021-07-30,2026-09-29,still_trading,
+folgory-coin,FLG,,,,2020-01-12,2020-03-14,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+ftx-token,FTT,,,,2019-12-20,2026-09-29,collapsed,FTX Nov 2022 collapse; thin post-crash tape may still trade. Hayden applies -100% rule only to LUNA and FTT.
+gala,GALA,,,,2021-09-13,2026-09-29,still_trading,
+gatetoken,GT,,,,2022-05-15,2026-09-29,still_trading,
+global-dollar-usdg,USDG,,,,2025-11-16,2026-09-29,still_trading,
+golem-network-tokens,GNT,,,,2018-01-07,2020-12-05,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+gram,GRAM,,,,2026-07-02,2026-09-29,still_trading,
+green-metaverse-token,GMT,,,,2022-03-09,2026-09-29,still_trading,
+harmony,ONE,,,,2019-06-01,2026-09-29,still_trading,
+havven,SNX,,,,2020-07-09,2026-09-29,still_trading,
+hedera-hashgraph,HBAR,,,,2019-09-29,2026-09-29,still_trading,
+hedgetrade,HEDG,,,,2019-06-02,2021-02-27,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+helium,HNT,,,,2020-09-24,2022-10-14,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+hex,HEX,,,,2020-03-29,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+hive-blockchain,HIVE,,,,2020-04-27,2026-09-29,still_trading,
+holo,HOT,,,,2019-02-18,2026-09-29,still_trading,
+humanity-protocol,H,,,,2025-10-26,2026-06-27,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+huobi-token,HT,,,,2018-05-13,2023-09-16,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+hypercash,HC,,,,2019-09-25,2020-11-10,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+hyperion,HYN,,,,2020-05-03,2020-10-10,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+hyperliquid,HYPE,,,,2026-09-24,2026-09-29,still_trading,
+icon,ICX,,,,2018-06-13,2026-09-03,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+immutable-x,IMX,,,,2022-01-10,2026-09-29,still_trading,
+injective-protocol,INJ,,,,2020-10-21,2026-09-29,still_trading,
+ino-coin,INO,,,,2019-07-21,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+insight-chain,INB,,,,2018-11-25,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+internet-computer,ICP,,,,2021-05-11,2026-09-29,still_trading,
+iostoken,IOST,,,,2019-03-22,2026-09-29,still_trading,
+iota,MIOTA,,,,2018-05-31,2026-09-29,still_trading,
+karatgold-coin,KBC,,,,2019-08-04,2020-01-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+kaspa,KAS,,,,2023-11-12,2026-09-29,still_trading,
+kick-token,KICK,,,,2020-02-02,2020-02-15,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+klaytn,KLAY,,,,2021-06-24,2024-10-30,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+komodo,KMD,,,,2020-08-11,2025-07-04,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+kucoin-shares,KCS,,,,2018-01-07,2020-06-20,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+kucoin-token,KCS,,,,2021-02-21,2026-09-29,still_trading,
+kusama,KSM,,,,2020-09-04,2026-09-29,still_trading,
+kyber-network,KNC,,,,2020-06-12,2026-09-29,still_trading,
+lido-dao,LDO,,,,2022-05-09,2026-09-29,still_trading,
+lisk,LSK,,,,2020-02-06,2026-09-29,still_trading,
+litecoin,LTC,,,,2018-01-01,2026-09-29,still_trading,
+loopring,LRC,,,,2020-06-12,2026-04-01,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+maker,MKR,sky,SKY,2025-09-15,2020-07-23,2025-09-15,migrated,Maker (MKR) -> Sky (SKY); Hayden will splice returns.
+mantle,MNT,,,,2023-07-30,2026-09-29,still_trading,
+mantra,OM,,,,2021-03-08,2026-03-02,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+matic-network,MATIC,polygon-ecosystem-token,POL,2024-09-10,2019-04-26,2024-09-10,migrated,MATIC rebrand/migration to POL on Polygon; Hayden will splice returns.
+maximine-coin,MXM,,,,2018-12-30,2020-02-15,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+memecore,M,,,,2025-07-13,2026-09-29,still_trading,
+metaverse-dualchain-network-architecture,DNA,,,,2020-02-23,2020-07-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+mexc-token,MEXC,,,,2019-10-06,2019-11-23,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+midnight-network,NIGHT,,,,2026-03-11,2026-09-29,still_trading,
+mimblewimblecoin,MWC,,,,2020-04-12,2020-08-08,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+mindol,MIN,,,,2019-11-17,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+minebee,MB,,,,2019-09-22,2020-04-25,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+mithril,MITH,,,,2019-04-19,2022-12-22,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+moac,MOAC,,,,2018-06-03,2019-03-30,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+mobius,MOBI,,,,2020-09-27,2020-10-10,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+monero,XMR,,,,2019-03-15,2026-09-29,still_trading,Still trading elsewhere. Binance truncated ~2024-02-20; CoinGecko refill after that (Demo ~365d window) — check gap risk after 2024-02-20.
+myx-finance,MYX,,,,2025-09-14,2026-02-21,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+nano,NANO,,,,2019-04-03,2022-01-24,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+near,NEAR,,,,2020-10-14,2026-09-29,still_trading,
+nem,XEM,,,,2020-11-24,2024-06-17,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+neo,NEO,,,,2018-01-01,2026-09-29,still_trading,
+official-trump,TRUMP,,,,2025-01-19,2026-09-29,still_trading,
+okb,OKB,,,,2019-08-18,2026-09-29,still_trading,
+omg,OMG,,,,2019-04-03,2024-06-17,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+omisego,OMG,,,,2019-04-03,2024-06-17,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+ondo-finance,ONDO,,,,2025-04-11,2026-09-29,still_trading,
+ontology,ONT,,,,2018-06-08,2026-09-29,still_trading,
+optimism,OP,,,,2022-06-01,2026-09-29,still_trading,
+pancakeswap-token,CAKE,,,,2021-02-19,2026-09-29,still_trading,
+pax-gold,PAXG,,,,2020-08-28,2026-09-29,still_trading,
+pepe,PEPE,,,,2023-05-05,2026-09-29,still_trading,
+pi,PI,,,,2025-03-09,2026-09-29,still_trading,
+platincoin,PLC,,,,2019-08-04,2019-09-07,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+playfuel,PLF,,,,2020-02-09,2020-07-11,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+polkadot,DOT,,,,2020-08-18,2026-09-29,still_trading,
+polygon-ecosystem-token,POL,,,,2024-09-13,2026-09-29,still_trading,
+populous,PPT,,,,2018-01-07,2019-05-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+prizm,PZM,,,,2019-10-13,2020-04-25,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+pudgy-penguins,PENGU,,,,2024-12-17,2026-09-29,still_trading,
+pump-fun,PUMP,,,,2025-09-11,2026-09-29,still_trading,
+pundi-x,NPXS,,,,2019-08-13,2021-04-05,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+qtum,QTUM,,,,2018-03-19,2026-09-29,still_trading,
+quant,QNT,,,,2021-07-29,2026-09-29,still_trading,
+ravedao,RAVE,,,,2026-04-12,2026-04-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+ravencoin,RVN,,,,2019-09-25,2026-09-29,still_trading,
+rchain,RHOC,,,,2018-01-07,2018-10-20,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+ren,REN,,,,2019-09-25,2024-12-10,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+render,RNDR,,,,2021-11-27,2026-09-29,still_trading,
+render-token,RNDR,,,,2021-11-27,2024-07-22,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+revain,R,,,,2018-02-04,2022-01-08,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+ripple,XRP,,,,2018-05-04,2026-09-29,still_trading,
+rocket-pool,RPL,,,,2023-01-18,2026-09-29,still_trading,
+sats,1000SATS,,,,2023-12-12,2026-09-29,still_trading,
+sei,SEI,,,,2023-08-15,2026-09-29,still_trading,
+shiba-inu,SHIB,,,,2021-05-10,2026-09-29,still_trading,
+siacoin,SC,,,,2020-07-06,2026-09-29,still_trading,
+silverway,SLV,,,,2019-07-21,2019-12-28,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+sky,SKY,,,,2025-09-17,2026-09-29,still_trading,
+smartcash,SMART,,,,2018-01-14,2018-07-28,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+solana,SOL,,,,2020-08-11,2026-09-29,still_trading,
+sonic,S,,,,2025-01-16,2026-09-29,still_trading,
+sora,XOR,,,,2024-01-21,2024-02-03,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+stacks,STX,,,,2019-10-25,2026-09-29,still_trading,
+status,SNT,,,,2023-05-19,2025-04-16,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+steem,STEEM,,,,2022-04-22,2026-09-29,still_trading,
+stellar,XLM,,,,2018-05-31,2026-09-29,still_trading,
+storeum,STO,,,,2025-05-02,2026-09-29,still_trading,
+story-protocol,IP,,,,2025-02-23,2026-02-28,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+stratis,STRAT,,,,2020-02-19,2020-11-12,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+sui,SUI,,,,2023-05-03,2026-09-29,still_trading,
+sushiswap,SUSHI,,,,2020-09-01,2026-09-29,still_trading,
+syscoin,SYS,,,,2021-09-24,2026-05-27,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+tagz5,TAGZ5,,,,2020-01-12,2020-05-02,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+terra-luna,LUNA,terra-luna-v2,LUNA,2022-05-28,2020-08-21,2022-05-13,collapsed,Classic LUNA through May 2022 collapse; Hayden applies -100% terminal return sensitivity only to LUNA/FTT. Binance LUNAUSDT after this is v2 — not spliced into classic series.
+tezos,XTZ,,,,2019-09-24,2026-09-29,still_trading,
+the-graph,GRT,,,,2020-12-17,2026-09-29,still_trading,
+the-sandbox,SAND,,,,2020-08-14,2026-09-29,still_trading,
+theta-fuel,TFUEL,,,,2019-05-24,2026-09-29,still_trading,
+theta-token,THETA,,,,2019-04-10,2026-09-29,still_trading,
+thorchain,RUNE,,,,2020-09-04,2026-09-29,still_trading,
+thorecoin,THR,,,,2019-03-10,2020-05-02,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+thorenext,THX,,,,2019-09-01,2020-04-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+tnc-coin,TNC,,,,2020-05-24,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+toncoin,TON,,,,2024-08-08,2026-06-30,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+tron,TRX,,,,2018-06-11,2026-09-29,still_trading,
+trust-wallet-token,TWT,,,,2021-01-27,2026-09-29,still_trading,
+uma,UMA,,,,2020-09-09,2026-09-29,still_trading,
+uniswap,UNI,,,,2020-09-17,2026-09-29,still_trading,
+united-stables,U,,,,2026-01-13,2026-09-29,still_trading,
+unus-sed-leo,LEO,,,,2019-06-23,2026-09-29,still_trading,
+usd1,USD1,,,,2025-05-22,2026-09-29,still_trading,
+v-systems,VSYS,,,,2019-06-30,2020-04-18,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+vechain,VET,,,,2018-07-25,2026-09-29,still_trading,
+vechainold,VEN,,,,2018-06-22,2018-10-19,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+verge,XVG,,,,2021-06-06,2026-09-29,still_trading,
+veritaseum,VERI,,,,2018-01-07,2019-03-09,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+vestchain,VEST,,,,2019-04-07,2020-09-26,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+virtual-protocol,VIRTUAL,,,,2025-04-11,2026-09-29,still_trading,
+waltonchain,WTC,,,,2020-04-07,2023-12-07,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+wanchain,WAN,,,,2019-08-27,2026-04-23,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+waves,WAVES,,,,2019-01-18,2024-06-17,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+world-liberty-financial-wlfi,WLFI,,,,2025-09-01,2026-09-29,still_trading,
+worldcoin-org,WLD,,,,2023-07-24,2026-09-29,still_trading,
+xdc-network,XDC,,,,2023-06-25,2026-09-29,still_trading,
+yearn-finance,YFI,,,,2020-08-10,2026-09-29,still_trading,
+zb-token,ZB,,,,2019-08-11,2021-01-09,source_truncated,source_truncated = exchange/source delist (often delisted_from_binance); panel ends before sample_end — not auto-labeled collapsed.
+zcash,ZEC,,,,2019-03-21,2026-09-29,still_trading,
+zilliqa,ZIL,,,,2019-02-19,2026-09-29,still_trading,
