@@ -35,6 +35,12 @@ STABLE_SYMBOLS = {
     "UST", "USTC", "USDN", "USDK", "HUSD", "SUSD", "CUSD", "OUSD",
     "MIM", "FEI", "TRIBE", "RSV", "PAX", "USDX", "USDJ", "DOLA",
     "CRVUSD", "GHO", "USDY", "USD0", "RLUSD", "AUSD",
+    # Hayden v2 (2026-11): additional stables with no volatile return
+    "USD1", "USDG", "U",
+}
+# Gold / commodity-backed — FLAG only; do NOT auto-exclude (group decide).
+FLAG_NOT_AUTO_EXCLUDE = {
+    "PAXG",  # Pax Gold — still in universe until group decides
 }
 WRAP_SYMBOLS = {
     "WBTC", "WETH", "STETH", "WSTETH", "CBETH", "RETH", "WEETH",
@@ -50,6 +56,12 @@ STABLE_OR_WRAP_SLUGS = {
     "binance-wrapped-btc", "wrapped-bnb", "pax-dollar", "gemini-dollar",
     "frax", "liquity-usd", "ethena-usde", "paypal-usd", "euro-coin",
     "first-digital-usd", "usd-coin-bridged", "tether-gold",  # XAUT sometimes listed; keep out of wrap if gold — skip
+    # Hayden v2
+    "usd1", "global-dollar-usdg", "united-stables",
+}
+# Slugs to flag in exclusion log as review-only (not excluded by is_excluded).
+FLAG_NOT_AUTO_EXCLUDE_SLUGS = {
+    "pax-gold",
 }
 
 
@@ -112,6 +124,14 @@ def main() -> None:
     ust_n = int((excl_log["exclude_reason"] == "stablecoin_ust").sum())
     print(f"excluded {len(excl):,} rows; unique excluded tickers={excl_log['symbol'].nunique()}; UST-family tickers={ust_n}")
     print(f"  -> {excl_path}")
+
+    # Flag PAXG / pax-gold for group decision (still kept in clean/universe)
+    flag_mask = raw["symbol"].astype(str).str.upper().isin(FLAG_NOT_AUTO_EXCLUDE) | raw["slug"].astype(str).str.lower().isin(FLAG_NOT_AUTO_EXCLUDE_SLUGS)
+    flag_rows = raw.loc[flag_mask & ~raw["excluded"], ["symbol", "slug"]].drop_duplicates()
+    if len(flag_rows):
+        flag_path = PROCESSED / "flag_not_auto_exclude_v2.csv"
+        flag_rows.to_csv(flag_path, index=False)
+        print(f"FLAG_NOT_AUTO_EXCLUDE (kept in universe): {flag_rows.to_dict('records')} -> {flag_path}")
 
     clean = raw[~raw["excluded"]].drop(columns=["excluded", "exclude_reason"]).copy()
     clean_path = PROCESSED / "cmc_snapshots_clean_v0_1.csv"
