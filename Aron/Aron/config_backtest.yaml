@@ -1,0 +1,6 @@
+# 的回測設定
+one_side_cost_bps: 15.0
+risk_free_weekly: 0.0
+weight_cap: 0.10
+info_cutoff_offset_days: 1
+rebalance_freq_days: 7
