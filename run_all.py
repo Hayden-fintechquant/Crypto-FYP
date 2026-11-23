@@ -73,7 +73,7 @@ def main():
         run("4 OFFICIAL factor run", [py, "run_fyp1.py"], A, log)
         run("5 benchmarks", [py, "run_benchmarks.py", "--panel", A / "data" / "panel.csv", "--universe", A / "data" / "universe.csv", "--out", "results_bench"], C, log)
         run("6 review_C", [py, "review_C.py", "--weights", C / "results_bench" / "weights.csv", "--log", C / "results_bench" / "weekly_log.csv",
-                           "--panel", "data/panel.csv", "--universe", "data/universe.csv", "--cost_bps", "20", "--cap", "0.10", "--offset", "1"], A, log)
+                           "--panel", "data/panel.csv", "--universe", "data/universe.csv", "--cost_bps", "15", "--cap", "0.10", "--offset", "1"], A, log)
         run("7 analysis", [py, A / "fyp1_analysis.py", "--panel", A / "data" / "panel.csv", "--universe", A / "data" / "universe.csv",
                            "--bench", C / "results_bench", "--out", OUT / "analysis"], A, log)
     for src, dst in ((A / "results", OUT / "factors"), (C / "results_bench", OUT / "benchmarks")):

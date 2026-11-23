@@ -1,0 +1,11 @@
+,value
+pooled_member_coin_days,200021.0
+pooled_excess_kurtosis,120.329
+pooled_skew,2.8287
+median_coin_excess_kurtosis,7.9945
+share_abs_ret_gt_20pct,0.0105
+coin_days_beyond_5_sigma,656.0
+expected_beyond_5_sigma_if_gaussian,0.1147
+btc_excess_kurtosis,3.8671
+btc_days_beyond_5_sigma,2.0
+btc_ann_vol,0.5728

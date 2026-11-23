@@ -1,0 +1,5 @@
+window,n_coins,mean_pairwise_corr
+2023 (calm benchmark year),89,0.493
+2022 pre-Luna (Mar-Apr),86,0.584
+Terra/Luna window (2022-05-07..05-20),87,0.834
+FTX window (2022-11-07..11-20),88,0.895

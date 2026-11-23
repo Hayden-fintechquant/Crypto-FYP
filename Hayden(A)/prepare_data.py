@@ -1,6 +1,6 @@
 """prepare_data.py  --  adapter between Student B's data layer and the research pipeline.
 
-    python prepare_data.py PANEL.csv UNIVERSE.csv [OUT_DIR=data]
+    python prepare_data.py PANEL.csv UNIVERSE.csv [OUT_DIR=data] [--keep-unverified]
 
 Reads  : B's price_mcap_panel (date, coin_id, close, volume_usd, market_cap, end_reason, outlier_check,
          weekly_ffill_flag, symbol, ...) and universe_membership (rebalance_date, coin_id[CMC slug],
@@ -9,7 +9,7 @@ Writes : OUT_DIR/panel.csv, OUT_DIR/universe.csv, OUT_DIR/adapter_log.txt,
          OUT_DIR/weekly_coverage_report.csv, OUT_DIR/coverage_by_year.csv
 
 What it does (every rule is also written to adapter_log.txt):
-  1. drops rows B marked outlier_check == "exclude" (data errors);
+  1. drops rows B marked data_error / exclude, and unverified ones unless --keep-unverified (verified_real is kept);
   2. drops weekly forward-filled rows (weekly_ffill_flag): they are not daily data and would create
      artificial zero-return days;
   3. splices token migrations into ONE series expressed in the new token's units
@@ -23,6 +23,10 @@ import numpy as np
 import pandas as pd
 
 # old panel id -> (new panel id, units of OLD token per 1 NEW token)
+# Rows before these dates belong to a pre-migration series in different units that B's panel does not splice
+# (AAVE: LEND era, price ~0.005 USD vs ~43 USD after the 2020-10 migration, market cap also corrupted -> an 8,359x "return").
+DROP_BEFORE = {"aave": "2020-10-15"}
+
 SPLICES = {
     "maker": ("sky", 24000.0),
     "fantom": ("sonic", 1.0),
@@ -40,21 +44,32 @@ EXCLUDE_SYMBOLS = {"USDT", "USDC", "DAI", "BUSD", "TUSD", "FDUSD", "USDE", "USDS
                    "STETH", "WSTETH", "WEETH", "CBBTC", "PAXG", "XAUT", "USDD", "USD1", "USDG", "SUSDE"}
 
 
-def main(panel_path, univ_path, out="data"):
+def main(panel_path, univ_path, out="data", keep_unverified=False):
     log = []
     p = pd.read_csv(panel_path, parse_dates=["date"], low_memory=False)
     n0 = len(p)
     log.append(f"input panel: {n0} rows, {p.coin_id.nunique()} coins, {p.date.min().date()} .. {p.date.max().date()}")
 
     # 1. data-error rows
-    bad = p["outlier_check"].astype(str).eq("exclude")
+    # B's final panel labels flagged rows verified_real / unverified / data_error (older panels: "exclude").
+    # Default: keep verified_real, drop data_error / exclude / unverified (conservative; decided before looking at results).
+    # --keep-unverified keeps the unverified rows (sensitivity run).
+    lab = p["outlier_check"].astype(str)
+    drop_labels = {"exclude", "data_error"} | (set() if keep_unverified else {"unverified"})
+    bad = lab.isin(drop_labels)
+    log.append("outlier_check counts: " + str(lab[lab.isin({"exclude", "data_error", "unverified", "verified_real"})].value_counts().to_dict()))
     p = p[~bad]
-    log.append(f"dropped outlier_check=exclude rows: {int(bad.sum())}")
+    log.append(f"dropped outlier_check in {sorted(drop_labels)} rows: {int(bad.sum())} (keep_unverified={keep_unverified})")
 
     # 2. weekly forward-filled rows
     ff = p["weekly_ffill_flag"].astype(str).str.lower().eq("true")
     p = p[~ff]
     log.append(f"dropped weekly_ffill rows (not daily data): {int(ff.sum())}")
+
+    for cid, d0 in DROP_BEFORE.items():
+        m = (p.coin_id == cid) & (p.date < pd.Timestamp(d0))
+        p = p[~m]
+        log.append(f"dropped {cid} rows before {d0} (pre-migration series in different units): {int(m.sum())}")
 
     p = p.rename(columns={"market_cap": "mcap"})
     keep = [c for c in ["date", "coin_id", "close", "volume_usd", "mcap", "end_reason", "symbol"] if c in p.columns]
@@ -81,6 +96,13 @@ def main(panel_path, univ_path, out="data"):
     assert dup == 0, f"duplicate (date,coin) after splice: {dup}"
     p.to_csv(f"{out}/panel.csv", index=False)
     log.append(f"output panel: {len(p)} rows, {p.coin_id.nunique()} coins")
+    # guard: a >10x daily move that survived all cleaning is a unit/splice error -> stop (never silently pass)
+    _q = p.sort_values(["coin_id", "date"]).copy()
+    _q["_r"] = _q.groupby("coin_id")["close"].pct_change()
+    _bad = _q[_q["_r"] > 10]
+    if len(_bad):
+        raise SystemExit("STOP: daily return > 1000% survives cleaning (unit/splice error?):\n" + _bad[["date", "coin_id", "close", "_r"]].to_string())
+    log.append("guard: no daily return > 1000% in the output panel")
 
     # 4./5. universe
     u = pd.read_csv(univ_path, parse_dates=["rebalance_date"])
@@ -129,4 +151,5 @@ def main(panel_path, univ_path, out="data"):
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "data")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    main(args[0], args[1], args[2] if len(args) > 2 else "data", keep_unverified="--keep-unverified" in sys.argv)

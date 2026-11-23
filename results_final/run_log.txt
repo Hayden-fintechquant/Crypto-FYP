@@ -1,0 +1,214 @@
+input panel: /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/price_mcap_panel_v1.csv
+sha256: 5ae24645995366b12268298ce30375fe2ebc9d9a7460fcd0d69431f671c4d538
+universe: /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/universe_membership_cmc_v0_2.csv
+sha256: c6b95b8f032c9f6228e9e6fbf16d1623ffb32143aecaf3b7166f9d74dd931dd6
+
+=== 1 adapter
+$ /usr/local/bin/python3 /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/prepare_data.py /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/price_mcap_panel_v1.csv /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/universe_membership_cmc_v0_2.csv /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data
+input panel: 331802 rows, 233 coins, 2018-01-01 .. 2026-09-29
+outlier_check counts: {'verified_real': 245, 'unverified': 156, 'data_error': 1}
+dropped outlier_check in ['data_error', 'exclude', 'unverified'] rows: 157 (keep_unverified=False)
+dropped weekly_ffill rows (not daily data): 40511
+dropped aave rows before 2020-10-15 (pre-migration series in different units): 151
+splice maker->sky ratio 24000: old ends 2025-09-15, new starts 2025-09-17 (gap 2d), bridge return +1.7%
+splice fantom->sonic ratio 1: old ends 2025-01-13, new starts 2025-01-16 (gap 3d), bridge return +11.8%
+splice matic-network->polygon-ecosystem-token ratio 1: old ends 2024-09-10, new starts 2024-09-13 (gap 3d), bridge return +8.3%
+output panel: 290983 rows, 230 coins
+guard: no daily return > 1000% in the output panel
+manual id map filled 0 of 3 unmapped member-rows
+still unmapped (dropped): 3 rows, coins ['morpho', 'plasma-xpl', 'siren-bsc']
+excluded non-risk assets from universe: 42 member-rows, coins ['pax-gold']
+output universe: 18193 member-rows (from 18239), 456 weeks
+coverage (price+volume): all weeks 76.1%; since 2020-09-21 85.3%; weeks>=30 priced since 2020-09-21: 311/315
+
+
+=== 2 review_B (data audit)
+$ /usr/local/bin/python3 review_B.py --panel data/panel.csv --universe data/universe.csv
+[PASS] panel 必要欄位 — date, coin_id, close, volume_usd, mcap 都有
+[WARN] panel 建議欄位 (問題 2、6、8、9) — 缺少 ['circulating_supply', 'total_supply', 'supply_source', 'mcap_source', 'price_source', 'days_since_listing', 'outlier_check', 'retrieved_at']
+[PASS] (date, coin_id) 不重複 — 0 列重複
+[PASS] 收盤價為正數 — 0 列 NaN 或 <= 0
+[PASS] 最後日期 <= 2026-09-29 (不含未收盤日) — 最後日期 2026-09-29
+[WARN] 各幣沒有缺日 — 共缺 41181 天
+[PASS] 沒有『整段歷史市值都是 0』的幣 (問題 1) — 無 (另有 10615 列市值<=0)
+[WARN] 近似市值比例 (問題 2) — 沒有 mcap_source 欄位，無法檢查
+[PASS] 再平衡日是同一個星期幾 — {'Monday': 18193}
+[PASS] universe 達到 30 個幣的第一週 — 2018-01-08；之後仍少於 30 的週數: 0
+[PASS] universe 每週有進有出 (問題 3) — 平均每週新增 1.45、剔除 1.45
+[WARN] panel 中從未進過 universe 的幣 — 5 個: ['curve-dao-token', 'global-dollar-usdg', 'pax-gold', 'united-stables', 'usd1']
+[PASS] 有中途停止的幣 (遷移、下架或崩盤) — 96 個
+[PASS] 包含已崩盤的幣 (LUNA / FTT，問題 3) — {'luna': True, 'ftt': True, 'ftx': True}
+[PASS] end_reason / last_trade_date (問題 9) — panel 內有
+[PASS] 成員中沒有穩定幣與包裝代幣 — 無
+[WARN] 極端值核對 (問題 6) — 77 筆單日 >50% 變動，沒有 outlier_check 欄位
+[WARN] 沒有停滯價格 (連續 3 天收盤相同) — 243 列
+[WARN] 沒有零成交量 — 5685 列
+
+總結: PASS 12 / WARN 7 / FAIL 0
+/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/review_B.py:141: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+  res = review(pd.read_csv(a.panel), pd.read_csv(a.universe), a.end)
+
+
+=== 4 OFFICIAL factor run
+$ /usr/local/bin/python3 run_fyp1.py
+預先登記檢查通過
+[OFFICIAL] 執行中...
+模式: OFFICIAL    樣本: 2020-09-21 ~ 2026-09-29    有效週數: 302
+預先登記雜湊: fc69e0d4ba005333...  鎖定時間(UTC): 2026-11-22T16:50:51+00:00
+候選因子: ['size', 'mom_2w', 'mom_4w', 'rev_1w', 'vol_28d', 'liq_28d']
+因子覆蓋率不足被淘汰: []
+因子冗餘被淘汰: {'liq_28d': [('size', 0.8320355970456771)]}
+留下的因子: ['size', 'mom_2w', 'mom_4w', 'rev_1w', 'vol_28d']
+宣告的檢定總數 (多重檢定修正使用): 13
+
+[IC / ICIR]
+         ic_mean    icir  ic_t_nw  ic_hit  n_weeks
+size      0.0756  0.3073   4.9990  0.5947 301.0000
+mom_2w   -0.0206 -0.0844  -1.4971  0.4385 301.0000
+mom_4w   -0.0210 -0.0818  -1.5486  0.4651 301.0000
+rev_1w    0.0132  0.0517   0.9930  0.5083 301.0000
+vol_28d  -0.1142 -0.3671  -6.7228  0.3787 301.0000
+
+[五分位 (Q5-Q1 為多空價差；單調性 1 = 完全單調)]
+         q1_mean  q5_mean  ls_mean  ls_t_nw  monotonicity
+size      0.0091   0.0106   0.0015   0.3727        0.3000
+mom_2w    0.0056   0.0100   0.0044   0.9600        0.9000
+mom_4w    0.0048   0.0090   0.0042   1.0940        0.6000
+rev_1w    0.0121   0.0029  -0.0091  -2.1142       -0.9000
+vol_28d   0.0101   0.0065  -0.0036  -0.7366       -0.9000
+
+[Fama-MacBeth 多變量 (週報酬單位)]
+           mean       t      p
+const    0.0084  1.1570 0.2482
+size    -0.0012 -0.8359 0.4039
+mom_2w   0.0039  1.1061 0.2696
+mom_4w  -0.0008 -0.2339 0.8153
+rev_1w  -0.0023 -0.8547 0.3934
+vol_28d -0.0036 -1.3583 0.1754
+
+[Spanning: 控制 ['size', 'mom_4w']]
+           mean       t      p
+mom_2w   0.0054  1.8179 0.0701
+rev_1w  -0.0036 -1.8416 0.0665
+vol_28d -0.0037 -1.5360 0.1256
+
+[事前門檻下的判定]
+        verdict                                           reasons
+size       FAIL            五分位單調性不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+mom_2w     FAIL            IC t 值不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+mom_4w     FAIL  IC t 值不足; 五分位單調性不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+rev_1w     FAIL            IC t 值不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+vol_28d    FAIL                      多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+
+[前視稽核] 通過: 截斷資料後結果完全一致
+      date  max_diff_scores  max_diff_mu_ew  max_diff_mu_icir  max_diff_mu_fm
+2023-10-16           0.0000          0.0000            0.0000          0.0000
+2024-09-09           0.0000          0.0000            0.0000          0.0000
+2025-02-24           0.0000          0.0000            0.0000          0.0000
+2026-01-19           0.0000          0.0000            0.0000          0.0000
+
+全部結果已寫入 results/
+/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/src/data_io.py:10: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(path, parse_dates=["date"])
+
+
+=== 5 benchmarks
+$ /usr/local/bin/python3 run_benchmarks.py --panel /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/panel.csv --universe /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/universe.csv --out results_bench
+equal_weight           weeks 314
+market_cap             weeks 314
+min_variance           weeks 314
+risk_parity            weeks 314
+mean_variance          weeks 314
+black_litterman        weeks 314
+btc_buy_hold           weeks 314
+market_cap_uncapped    weeks 314
+
+                      weeks  ann_return  ann_vol  sharpe  max_drawdown  es_5pct_weekly  worst_week  avg_turnover  avg_names  total_cost_drag_ann  sharpe_gross
+black_litterman      314.0       0.467    0.682   0.908        -0.785          -0.191      -0.462         0.144     22.481                0.011         0.925
+btc_buy_hold         314.0       0.403    0.566   0.880        -0.752          -0.159      -0.254         0.003      1.000                0.000         0.880
+equal_weight         314.0       0.176    0.775   0.603        -0.864          -0.219      -0.488         0.123     33.844                0.010         0.615
+market_cap           314.0       0.288    0.710   0.716        -0.819          -0.198      -0.455         0.046     33.844                0.004         0.721
+market_cap_uncapped  314.0       0.361    0.595   0.819        -0.766          -0.173      -0.361         0.008     33.844                0.001         0.820
+mean_variance        314.0       0.349    0.762   0.777        -0.828          -0.214      -0.493         0.293     11.793                0.023         0.807
+min_variance         314.0       0.585    0.683   1.016        -0.738          -0.183      -0.455         0.168     14.156                0.013         1.035
+risk_parity          314.0       0.268    0.743   0.696        -0.828          -0.211      -0.484         0.120     33.363                0.009         0.709
+
+weeks with a logged fall-back/note: {}
+skipped weeks: 0
+
+
+=== 6 review_C
+$ /usr/local/bin/python3 review_C.py --weights /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench/weights.csv --log /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench/weekly_log.csv --panel data/panel.csv --universe data/universe.csv --cost_bps 15 --cap 0.10 --offset 1
+[PASS] 找到的配置器 — ['black_litterman', 'btc_buy_hold', 'equal_weight', 'market_cap', 'market_cap_uncapped', 'mean_variance', 'min_variance', 'risk_parity']
+[PASS] 六個配置器 + BTC 基準都有 — 齊全
+[PASS] 各配置器的週數相同 — {'black_litterman': 314, 'btc_buy_hold': 314, 'equal_weight': 314, 'market_cap': 314, 'market_cap_uncapped': 314, 'mean_variance': 314, 'min_variance': 314, 'risk_parity': 314}
+[PASS] 每週權重加總 = 1 — 0 個 (配置器, 週) 不等於 1
+[PASS] 長倉 (沒有負權重) — 最小權重 6.556e-06
+[PASS] 只持有當週 universe 成員 — 0 筆持有非成員
+[PASS] 權重上限 (最佳化配置器) — 上限 10% (N 很小時放寬到 1/N)
+[PASS] 等權重確實等權 (equal_weight) — 最大離散 0
+[PASS] 持有的幣在 panel 都有價格 — 0 筆缺價格 (報酬被當成 0)
+[PASS] 毛報酬 = Σ權重 × 下週報酬 (獨立重算) — 0 個 (配置器, 週) 對不上
+[PASS] 換手率 = Σ|新權重 - 漂移後舊權重| (獨立重算) — 0 個對不上
+[PASS] 成本 = 換手率 × 15 bps — 0 個對不上
+[PASS] 淨報酬 = 毛報酬 - 成本 — 0 個對不上
+[PASS] 第一週換手率 = 100% (從現金建倉) — {'black_litterman': 1.0, 'btc_buy_hold': 1.0, 'equal_weight': 1.0, 'market_cap': 1.0, 'market_cap_uncapped': 1.0, 'mean_variance': 1.0, 'min_variance': 1.0, 'risk_parity': 1.0}
+[PASS] 夏普沒有好到不真實 (> 3 要懷疑前視) — {'black_litterman': 0.91, 'btc_buy_hold': 0.88, 'equal_weight': 0.6, 'market_cap': 0.72, 'market_cap_uncapped': 0.82, 'mean_variance': 0.78, 'min_variance': 1.02, 'risk_parity': 0.7}
+[PASS] 週淨報酬 > -100% — 最小 -49.27%
+
+總結: PASS 16 / WARN 0 / FAIL 0
+/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/review_C.py:140: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+  res = review(pd.read_csv(a.weights), pd.read_csv(a.log), pd.read_csv(a.panel), pd.read_csv(a.universe),
+
+
+=== 7 analysis
+$ /usr/local/bin/python3 /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/fyp1_analysis.py --panel /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/panel.csv --universe /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/universe.csv --bench /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench --out /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/results_final/analysis
+1. DAILY RETURN DISTRIBUTION (member coins, 2020-09-21 onward)
+   coin-days 200,021; pooled excess kurtosis 120.3; median per-coin excess kurtosis 8.0; BTC 3.9
+   |z|>5 events: 656 observed vs 0.1147 expected under normality; share of |daily return|>20%: 1.05%
+
+2. MEAN PAIRWISE DAILY CORRELATION (coins with >=90% coverage in the window)
+   2023 (calm benchmark year)                 n= 89  corr=0.49
+   2022 pre-Luna (Mar-Apr)                    n= 86  corr=0.58
+   Terra/Luna window (2022-05-07..05-20)      n= 87  corr=0.83
+   FTX window (2022-11-07..11-20)             n= 88  corr=0.90
+
+3. BENCHMARKS (net of 20 bps, 314 weeks): net Sharpe with 95% block-bootstrap CI (4-week blocks, 2000 resamples)
+   equal_weight            0.60 [-0.28,  1.42]  | vs EW: +0.00 [+0.00, +0.00]
+   market_cap              0.72 [-0.16,  1.54]  | vs EW: +0.11 [-0.02, +0.26]
+   min_variance            1.02 [ 0.15,  1.84]  | vs EW: +0.41 [+0.18, +0.67]
+   risk_parity             0.70 [-0.18,  1.52]  | vs EW: +0.09 [+0.03, +0.16]
+   mean_variance           0.78 [-0.09,  1.63]  | vs EW: +0.17 [-0.07, +0.40]
+   black_litterman         0.91 [ 0.05,  1.70]  | vs EW: +0.31 [+0.14, +0.50]
+   btc_buy_hold            0.88 [ 0.00,  1.71]  | vs EW: +0.28 [-0.26, +0.88]
+   market_cap_uncapped     0.82 [-0.06,  1.66]  | vs EW: +0.22 [-0.14, +0.63]
+
+   Net return by calendar year (2020 = from Sep 21; 2026 = to Sep 21):
+      equal_weight  market_cap  min_variance  risk_parity  mean_variance  black_litterman  btc_buy_hold  market_cap_uncapped
+date                                                                                                                        
+2020          0.61        0.80          0.79         0.72           0.87             0.98          2.02                 1.68
+2021          4.43        3.16          5.42         4.43           5.92             3.29          0.43                 1.09
+2022         -0.79       -0.76         -0.67        -0.78          -0.79            -0.70         -0.65                -0.69
+2023          0.86        1.04          1.09         0.88           0.81             1.12          1.54                 1.23
+2024          0.55        1.00          1.15         0.75           0.62             1.10          1.33                 1.13
+2025         -0.49       -0.33         -0.02        -0.39          -0.30            -0.12         -0.07                -0.13
+2026         -0.01       -0.07         -0.04         0.01           0.07            -0.00         -0.08                -0.09
+
+   Net weekly return in stress weeks:
+                                        equal_weight  market_cap  min_variance  risk_parity  mean_variance  black_litterman  btc_buy_hold  market_cap_uncapped
+Terra/Luna week (rebalance 2022-05-09)        -0.233      -0.234        -0.155       -0.225         -0.264           -0.194        -0.080               -0.140
+FTX week (rebalance 2022-11-07)               -0.276      -0.257        -0.292       -0.274         -0.231           -0.281        -0.219               -0.228
+May-2021 crash week (2021-05-17)              -0.488      -0.455        -0.455       -0.484         -0.493           -0.462        -0.254               -0.361
+
+   Net Sharpe vs one-way trading cost (fee+slippage):
+                  equal_weight  market_cap  min_variance  risk_parity  mean_variance  black_litterman  btc_buy_hold  market_cap_uncapped
+one_way_cost_bps                                                                                                                        
+0                         0.61        0.72          1.04         0.71           0.81             0.92          0.88                 0.82
+20                        0.60        0.71          1.01         0.69           0.77             0.90          0.88                 0.82
+40                        0.58        0.71          0.98         0.68           0.73             0.88          0.88                 0.82
+80                        0.55        0.69          0.93         0.64           0.65             0.84          0.88                 0.81
+
+4. SELECTION DIAGNOSTICS (benchmark engine)
+   member-weeks 12,515; tradeable (price at cut-off + US$1M liquidity) 10,627 = 84.9%; avg tradeable per week 33.8 of 39.9
+   held positions without any price after entry (valued 0%, counted): 0
+
