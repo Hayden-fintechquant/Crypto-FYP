@@ -1,0 +1,15 @@
+input panel: 331802 rows, 233 coins, 2018-01-01 .. 2026-09-29
+outlier_check counts: {'verified_real': 245, 'unverified': 156, 'data_error': 1}
+dropped outlier_check in ['data_error', 'exclude', 'unverified'] rows: 157 (keep_unverified=False)
+dropped weekly_ffill rows (not daily data): 40511
+dropped aave rows before 2020-10-15 (pre-migration series in different units): 151
+splice maker->sky ratio 24000: old ends 2025-09-15, new starts 2025-09-17 (gap 2d), bridge return +1.7%
+splice fantom->sonic ratio 1: old ends 2025-01-13, new starts 2025-01-16 (gap 3d), bridge return +11.8%
+splice matic-network->polygon-ecosystem-token ratio 1: old ends 2024-09-10, new starts 2024-09-13 (gap 3d), bridge return +8.3%
+output panel: 290983 rows, 230 coins
+guard: no daily return > 1000% in the output panel
+manual id map filled 0 of 3 unmapped member-rows
+still unmapped (dropped): 3 rows, coins ['morpho', 'plasma-xpl', 'siren-bsc']
+excluded non-risk assets from universe: 42 member-rows, coins ['pax-gold']
+output universe: 18193 member-rows (from 18239), 456 weeks
+coverage (price+volume): all weeks 76.1%; since 2020-09-21 85.3%; weeks>=30 priced since 2020-09-21: 311/315

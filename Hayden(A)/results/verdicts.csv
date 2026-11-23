@@ -1,0 +1,6 @@
+﻿,verdict,reasons
+size,FAIL,五分位單調性不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+mom_2w,FAIL,IC t 值不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+mom_4w,FAIL,IC t 值不足; 五分位單調性不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+rev_1w,FAIL,IC t 值不足; 多變量 FM t 值不足; 多重檢定(Holm)後不顯著
+vol_28d,FAIL,多變量 FM t 值不足; 多重檢定(Holm)後不顯著

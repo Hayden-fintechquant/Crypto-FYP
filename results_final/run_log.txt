@@ -1,10 +1,10 @@
-input panel: /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/price_mcap_panel_v1.csv
+input panel: /Users/hayden/Desktop/final_panel/price_mcap_panel_v1.csv
 sha256: 5ae24645995366b12268298ce30375fe2ebc9d9a7460fcd0d69431f671c4d538
-universe: /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/universe_membership_cmc_v0_2.csv
+universe: /Users/hayden/Desktop/final_panel/universe_membership_cmc_v0_2.csv
 sha256: c6b95b8f032c9f6228e9e6fbf16d1623ffb32143aecaf3b7166f9d74dd931dd6
 
 === 1 adapter
-$ /usr/local/bin/python3 /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/prepare_data.py /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/price_mcap_panel_v1.csv /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/final/universe_membership_cmc_v0_2.csv /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/prepare_data.py /Users/hayden/Desktop/final_panel/price_mcap_panel_v1.csv /Users/hayden/Desktop/final_panel/universe_membership_cmc_v0_2.csv /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/data
 input panel: 331802 rows, 233 coins, 2018-01-01 .. 2026-09-29
 outlier_check counts: {'verified_real': 245, 'unverified': 156, 'data_error': 1}
 dropped outlier_check in ['data_error', 'exclude', 'unverified'] rows: 157 (keep_unverified=False)
@@ -23,7 +23,7 @@ coverage (price+volume): all weeks 76.1%; since 2020-09-21 85.3%; weeks>=30 pric
 
 
 === 2 review_B (data audit)
-$ /usr/local/bin/python3 review_B.py --panel data/panel.csv --universe data/universe.csv
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python review_B.py --panel data/panel.csv --universe data/universe.csv
 [PASS] panel 必要欄位 — date, coin_id, close, volume_usd, mcap 都有
 [WARN] panel 建議欄位 (問題 2、6、8、9) — 缺少 ['circulating_supply', 'total_supply', 'supply_source', 'mcap_source', 'price_source', 'days_since_listing', 'outlier_check', 'retrieved_at']
 [PASS] (date, coin_id) 不重複 — 0 列重複
@@ -45,12 +45,24 @@ $ /usr/local/bin/python3 review_B.py --panel data/panel.csv --universe data/univ
 [WARN] 沒有零成交量 — 5685 列
 
 總結: PASS 12 / WARN 7 / FAIL 0
-/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/review_B.py:141: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+/Users/hayden/Desktop/Crypto-FYP/Hayden(A)/review_B.py:141: DtypeWarning: Columns (5: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
   res = review(pd.read_csv(a.panel), pd.read_csv(a.universe), a.end)
 
 
+=== 3 tests Hayden(A)
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python -m pytest tests -q -p no:cacheprovider
+.....................................                                    [100%]
+37 passed in 19.63s
+
+
+=== 3 tests Aron
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python -m pytest tests -q -p no:cacheprovider
+...................                                                      [100%]
+19 passed in 0.61s
+
+
 === 4 OFFICIAL factor run
-$ /usr/local/bin/python3 run_fyp1.py
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python run_fyp1.py
 預先登記檢查通過
 [OFFICIAL] 執行中...
 模式: OFFICIAL    樣本: 2020-09-21 ~ 2026-09-29    有效週數: 302
@@ -108,12 +120,12 @@ vol_28d    FAIL                      多變量 FM t 值不足; 多重檢定(Holm
 2026-01-19           0.0000          0.0000            0.0000          0.0000
 
 全部結果已寫入 results/
-/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/src/data_io.py:10: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+/Users/hayden/Desktop/Crypto-FYP/Hayden(A)/src/data_io.py:10: DtypeWarning: Columns (5: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
   df = pd.read_csv(path, parse_dates=["date"])
 
 
 === 5 benchmarks
-$ /usr/local/bin/python3 run_benchmarks.py --panel /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/panel.csv --universe /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/universe.csv --out results_bench
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python run_benchmarks.py --panel /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/data/panel.csv --universe /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/data/universe.csv --out results_bench
 equal_weight           weeks 314
 market_cap             weeks 314
 min_variance           weeks 314
@@ -138,7 +150,7 @@ skipped weeks: 0
 
 
 === 6 review_C
-$ /usr/local/bin/python3 review_C.py --weights /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench/weights.csv --log /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench/weekly_log.csv --panel data/panel.csv --universe data/universe.csv --cost_bps 15 --cap 0.10 --offset 1
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python review_C.py --weights /Users/hayden/Desktop/Crypto-FYP/Aron/Aron/results_bench/weights.csv --log /Users/hayden/Desktop/Crypto-FYP/Aron/Aron/results_bench/weekly_log.csv --panel data/panel.csv --universe data/universe.csv --cost_bps 15 --cap 0.10 --offset 1
 [PASS] 找到的配置器 — ['black_litterman', 'btc_buy_hold', 'equal_weight', 'market_cap', 'market_cap_uncapped', 'mean_variance', 'min_variance', 'risk_parity']
 [PASS] 六個配置器 + BTC 基準都有 — 齊全
 [PASS] 各配置器的週數相同 — {'black_litterman': 314, 'btc_buy_hold': 314, 'equal_weight': 314, 'market_cap': 314, 'market_cap_uncapped': 314, 'mean_variance': 314, 'min_variance': 314, 'risk_parity': 314}
@@ -157,12 +169,12 @@ $ /usr/local/bin/python3 review_C.py --weights /tmp/claude-0/-home-claude/4287b5
 [PASS] 週淨報酬 > -100% — 最小 -49.27%
 
 總結: PASS 16 / WARN 0 / FAIL 0
-/tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/review_C.py:140: DtypeWarning: Columns (0: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
+/Users/hayden/Desktop/Crypto-FYP/Hayden(A)/review_C.py:140: DtypeWarning: Columns (5: end_reason) have mixed types. Specify dtype option on import or set low_memory=False.
   res = review(pd.read_csv(a.weights), pd.read_csv(a.log), pd.read_csv(a.panel), pd.read_csv(a.universe),
 
 
 === 7 analysis
-$ /usr/local/bin/python3 /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/fyp1_analysis.py --panel /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/panel.csv --universe /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Hayden(A)/data/universe.csv --bench /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/Aron/Aron/results_bench --out /tmp/claude-0/-home-claude/4287b540-f8c2-53f0-a0a8-46766b340a9f/scratchpad/repo/results_final/analysis
+$ /Users/hayden/Desktop/Crypto-FYP/.venv/bin/python /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/fyp1_analysis.py --panel /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/data/panel.csv --universe /Users/hayden/Desktop/Crypto-FYP/Hayden(A)/data/universe.csv --bench /Users/hayden/Desktop/Crypto-FYP/Aron/Aron/results_bench --out /Users/hayden/Desktop/Crypto-FYP/results_final/analysis
 1. DAILY RETURN DISTRIBUTION (member coins, 2020-09-21 onward)
    coin-days 200,021; pooled excess kurtosis 120.3; median per-coin excess kurtosis 8.0; BTC 3.9
    |z|>5 events: 656 observed vs 0.1147 expected under normality; share of |daily return|>20%: 1.05%
