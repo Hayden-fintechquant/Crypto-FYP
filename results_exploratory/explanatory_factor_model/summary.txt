@@ -1,0 +1,45 @@
+EXPLORATORY explanatory factor model (NOT in the FYP I pre-registration)
+weeks 314 (2020-09-21 .. 2026-09-21), avg eligible coins/week 33.8, rf = 0
+
+[factor returns]
+     mean_weekly    t_NW  ann_sharpe  ann_vol
+MKT       0.0094  1.8142      0.8197   0.5951
+SMB      -0.0009 -0.2489     -0.1111   0.4278
+MOM       0.0031  1.0454      0.3259   0.4982
+
+[factor correlations]
+       MKT    SMB    MOM
+MKT  1.000  0.157 -0.117
+SMB  0.157  1.000 -0.080
+MOM -0.117 -0.080  1.000
+
+corr(MKT, equal-weight universe return) = 0.906
+
+[per-coin time-series regressions: 55 coins with >= 52 eligible weeks]
+       R2_capm   R2_3f  beta_capm   b_MKT   b_SMB   b_MOM
+count   55.000  55.000     55.000  55.000  55.000  55.000
+mean     0.438   0.496      1.228   1.168   0.504  -0.022
+std      0.152   0.149      0.312   0.290   0.386   0.272
+min      0.088   0.127      0.451   0.392  -0.162  -0.683
+25%      0.341   0.420      1.064   1.013   0.165  -0.169
+50%      0.443   0.492      1.204   1.183   0.462  -0.016
+75%      0.523   0.580      1.443   1.340   0.734   0.097
+max      0.923   0.923      2.210   2.028   1.481   0.732
+
+share of coins with |t| >= 2:  MKT 98%, SMB 56%, MOM 25%, alpha 2% (5% expected by chance)
+median R2 gain from adding SMB+MOM: 0.034
+
+[largest coins by eligible weeks]
+     coin_id  weeks  R2_capm  R2_3f  beta_capm  b_SMB  b_MOM  t_SMB  t_MOM
+bitcoin-cash    314     0.52   0.53       1.23   0.00  -0.17   0.01  -2.11
+    ethereum    314     0.80   0.80       1.14  -0.05   0.05  -1.01   1.24
+   chainlink    314     0.55   0.55       1.15   0.09  -0.11   1.06  -1.54
+     cardano    314     0.48   0.48       1.23   0.17   0.04   1.63   0.42
+ binancecoin    314     0.46   0.47       1.07   0.12  -0.16   1.32  -2.07
+     bitcoin    314     0.92   0.92       0.91  -0.00   0.00  -0.11   0.21
+    litecoin    314     0.61   0.61       1.11   0.01   0.00   0.16   0.00
+     stellar    314     0.26   0.28       1.12   0.21  -0.31   1.39  -2.48
+      ripple    314     0.29   0.32       1.05   0.06  -0.41   0.44  -3.71
+    polkadot    314     0.53   0.53       1.28   0.05   0.18   0.52   2.17
+        tron    314     0.29   0.29       0.67   0.11  -0.08   1.34  -1.12
+     uniswap    312     0.40   0.42       1.16   0.37   0.02   3.28   0.21
