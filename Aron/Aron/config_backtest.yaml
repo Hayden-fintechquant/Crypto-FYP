@@ -3,7 +3,7 @@ timing:
   info_cutoff_offset_days: 1        # weights use data up to Sunday close (= rebalance Monday - 1 day); hold Sunday close -> next Sunday close (7 days)
   periods_per_year: 52
 costs:
-  fee_bps_one_way: 15               # exchange fee per unit of traded notional
+  fee_bps_one_way: 10               # exchange fee per unit of traded notional
   slippage_bps_one_way: 5           # assumed market-impact/slippage per unit of traded notional (sensitivity reported)
 portfolio:
   weight_cap: 0.10                  # long-only, per-coin cap (applied to every allocator except BTC buy&hold and the uncapped market-cap reference)
