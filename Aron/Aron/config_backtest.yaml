@@ -1,6 +1,26 @@
-# 的回測設定
-one_side_cost_bps: 15.0
+# Benchmark backtest configuration (fixed BEFORE any benchmark result is examined)
+timing:
+  info_cutoff_offset_days: 1        # weights use data up to Sunday close (= rebalance Monday - 1 day); hold Sunday close -> next Sunday close (7 days)
+  periods_per_year: 52
+costs:
+  fee_bps_one_way: 15               # exchange fee per unit of traded notional
+  slippage_bps_one_way: 5           # assumed market-impact/slippage per unit of traded notional (sensitivity reported)
+portfolio:
+  weight_cap: 0.10                  # long-only, per-coin cap (applied to every allocator except BTC buy&hold and the uncapped market-cap reference)
+  min_names: 20                     # a week is skipped if fewer coins are tradeable
+tradeable:
+  min_avg_volume_usd: 1000000       # group rule 3: trailing 28-day average daily volume >= US$1M
+  min_volume_obs: 14
+risk_model:
+  cov_window_days: 180              # daily returns used for the covariance
+  min_obs_days: 60                  # coins with fewer valid daily returns are left out of risk-based allocators
+  shrinkage: ledoit_wolf
+benchmarks:
+  mv_risk_aversion: 5.0             # mean-variance: max mu'w - (gamma/2) w'Sigma w, mu = trailing sample mean (the classic 'error-maximising' benchmark)
+  bl_implied_sharpe: 0.5            # Black-Litterman prior: delta chosen so the market portfolio has this annual Sharpe ratio
+exits:
+  missing_exit_policy: last_price   # held coin with no price at the exit date: last traded price in the week (no price at all -> 0%, counted)
 risk_free_weekly: 0.0
-weight_cap: 0.10
-info_cutoff_offset_days: 1
-rebalance_freq_days: 7
+sample:
+  start: "2020-09-21"
+  end: "2026-09-28"

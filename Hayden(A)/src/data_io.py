@@ -49,3 +49,9 @@ class Market:
         self.first_date = self.close.apply(lambda s: s.first_valid_index())
         self.last_date = self.close.apply(lambda s: s.last_valid_index())
         self.end = full[-1]
+        # 只有「崩盤的幣」(B 的 end_reason == 'collapsed', 例如 LUNA、FTT) 套用終值報酬規則。
+        # 沒有 end_reason 欄位時為 None (維持舊行為: 所有提前結束的幣都適用)。
+        if "end_reason" in panel.columns:
+            self.collapsed = set(panel.loc[panel["end_reason"].astype(str).eq("collapsed"), "coin_id"].unique())
+        else:
+            self.collapsed = None

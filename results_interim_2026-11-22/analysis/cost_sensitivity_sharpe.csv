@@ -1,0 +1,5 @@
+one_way_cost_bps,equal_weight,market_cap,min_variance,risk_parity,mean_variance,black_litterman,btc_buy_hold,market_cap_uncapped
+0,0.612,0.722,1.028,0.711,0.829,0.938,0.88,0.82
+20,0.596,0.716,1.002,0.694,0.79,0.916,0.88,0.818
+40,0.58,0.709,0.977,0.678,0.751,0.894,0.879,0.817
+80,0.547,0.695,0.926,0.644,0.672,0.851,0.878,0.814

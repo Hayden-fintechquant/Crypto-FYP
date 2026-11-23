@@ -78,7 +78,14 @@ def iter_weekly_inputs(m, universe: pd.DataFrame, cfg: dict, return_window: bool
         Sigma = cov_fn(R.values) * 7.0
         cap = m.mcap.loc[c, ok].values.astype(float)
         w = cap / cap.sum()
-        delta = b["delta"] if b["delta_mode"] == "fixed" else market_delta(7 * (R.values @ w), b["risk_free_weekly"])
+        if b["delta_mode"] == "fixed":
+            delta = b["delta"]
+        elif b["delta_mode"] == "implied_sharpe":
+            # delta 使「市值加權組合」的事前年化夏普 = implied_sharpe  ->  delta = (SR/sqrt(52)) / sigma_m(週)
+            sig_m = float(np.sqrt(w @ Sigma @ w))
+            delta = (b["implied_sharpe"] / np.sqrt(52.0)) / sig_m
+        else:
+            delta = market_delta(7 * (R.values @ w), b["risk_free_weekly"])
         if return_window:
             yield t, ok, w, Sigma, delta, R, c
         else:

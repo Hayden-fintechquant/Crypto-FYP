@@ -1,2 +1,10 @@
-# Created by pytest automatically.
-*
+# (the previous root .gitignore contained only "*" -- written by pytest -- and made git ignore every NEW file)
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store
+# large / regenerated data: share via Drive or Git LFS, never plain git
+Hayden(A)/data/*.csv
+Hayden(A)/data_synth/
+*.zip

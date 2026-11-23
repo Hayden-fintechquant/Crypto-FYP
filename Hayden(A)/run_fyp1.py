@@ -45,6 +45,7 @@ def main():
         panel.to_csv("data_synth/panel.csv", index=False)
         universe.to_csv("data_synth/universe.csv", index=False)
         cfg["sample"]["start"], cfg["sample"]["end"] = "2019-07-01", "2024-12-23"
+        cfg["screening"]["min_avg_volume_usd"] = 0
         panel, universe = load_panel("data_synth/panel.csv"), load_universe("data_synth/universe.csv")
         lock_info = None
     else:

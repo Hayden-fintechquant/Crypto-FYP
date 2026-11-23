@@ -151,3 +151,8 @@ def test_weekly_prior_output(synth, cfg):
     pr = bl.weekly_prior(Market(panel), universe, cfg)
     assert len(pr) > 0
     assert abs(pr.groupby("date")["w_mkt"].sum() - 1).max() < 1e-9
+
+
+def test_monotonicity_threshold_is_not_broken_by_float_noise():
+    # Spearman of 5 quintile means can be -0.7999999999999999 for a perfect -0.8; the verdict must still treat it as 0.8
+    assert round(abs(-0.7999999999999999), 9) >= 0.8

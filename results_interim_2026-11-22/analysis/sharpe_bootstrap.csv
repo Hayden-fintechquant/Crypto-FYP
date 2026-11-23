@@ -1,0 +1,9 @@
+allocator,sharpe_net,ci95_low,ci95_high,sharpe_minus_EW,diff_ci95_low,diff_ci95_high
+equal_weight,0.596,-0.282,1.417,0.0,0.0,0.0
+market_cap,0.716,-0.163,1.541,0.12,-0.02,0.268
+min_variance,1.002,0.142,1.811,0.406,0.172,0.66
+risk_parity,0.694,-0.18,1.521,0.098,0.034,0.167
+mean_variance,0.79,-0.095,1.627,0.194,-0.069,0.427
+black_litterman,0.916,0.061,1.706,0.32,0.15,0.523
+btc_buy_hold,0.88,0.004,1.711,0.284,-0.244,0.883
+market_cap_uncapped,0.818,-0.064,1.659,0.222,-0.138,0.643

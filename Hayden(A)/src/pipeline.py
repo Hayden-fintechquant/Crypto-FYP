@@ -51,7 +51,7 @@ def run_pipeline(panel, universe, cfg, fixed=None, light=False):
         why = []
         if not abs(ic_tab.loc[f, "ic_t_nw"]) >= v["min_abs_t"]:
             why.append("IC t 值不足")
-        if not abs(q_tab.loc[f, "monotonicity"]) >= v["min_abs_monotonicity"]:
+        if not round(abs(q_tab.loc[f, "monotonicity"]), 9) >= v["min_abs_monotonicity"]:
             why.append("五分位單調性不足")
         if not abs(fm_multi.loc[f, "t"]) >= v["min_abs_t"]:
             why.append("多變量 FM t 值不足")

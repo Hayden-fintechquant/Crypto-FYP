@@ -13,6 +13,7 @@ timing:
   info_cutoff_offset_days: 1
   horizon_days: 7                     # 預測期 = 再平衡間隔 = 1 週
   delist_policy: last_price           # 持有期間幣消失: last_price(最後成交價) | minus_100(-100%) | drop(丟掉)
+  delist_scope: collapsed_only        # 終值規則只用於崩盤的幣(B 的 end_reason=collapsed: LUNA, FTT)；其他中斷(缺口/下市/遷移) -> NaN
 
 sample:
   start: "2020-09-21"                 # 因子樣本起點 (universe 達到 30 個幣的第一週)
@@ -29,6 +30,8 @@ factors:                              # 候選因子清單(也是「冗餘時保
 
 screening:
   min_days_since_listing: 30          # 上線(第一筆資料)後 30 天內不納入
+  min_avg_volume_usd: 1000000         # 小組規則 3: 近 28 天平均日成交額 >= US$1 百萬 (至少 14 天有成交量資料)
+  min_volume_obs: 14
   min_cross_section: 30               # 每週至少 30 個幣，否則該週整週丟掉
   min_factor_coverage: 0.80           # 因子在合格幣週中的覆蓋率 < 80% 就淘汰
   winsor_pct: [0.01, 0.99]            # 每週橫截面縮尾
@@ -51,13 +54,15 @@ combination:
   min_history_weeks: 52               # 至少 52 週歷史才開始產生預期報酬
   fm_window_weeks: 52                 # 滾動 Fama-MacBeth 溢酬窗口
   calibration: grinold                # 分數轉成報酬單位: mu = IC × 橫截面報酬波動 × 分數
+  primary_method: ew                  # 預先登記的主要方法: ew (依過去 IC 正負號等權重)；icir 與 fm 只作穩健性檢查
 
 black_litterman:
   cov_window_days: 180
   min_history_days: 90
   shrinkage: ledoit_wolf              # ledoit_wolf | sample
-  delta_mode: fixed                   # fixed | market
-  delta: 2.5                          # 風險厭惡係數 (delta_mode: fixed)
+  delta_mode: implied_sharpe          # fixed | market | implied_sharpe。預先登記: implied_sharpe (固定 delta=2.5 在加密資料下隱含市場年報酬中位數約 109%，不可信)
+  implied_sharpe: 0.5                 # 市值加權組合的事前年化夏普 (delta = (SR/sqrt(52))/sigma_m)
+  delta: 2.5                          # 只在 delta_mode: fixed 時使用
   risk_free_weekly: 0.0               # 無風險利率(每週)，基準情境 0
   tau: 0.05
   trust: 1.0                          # 信任係數: Omega = diag(P tau Sigma P') / trust

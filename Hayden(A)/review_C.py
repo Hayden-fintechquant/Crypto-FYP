@@ -72,7 +72,12 @@ def review(weights, log, panel, universe, cost_bps=15.0, cap=None, offset=1, del
 
     # 獨立重算報酬、換手率、成本
     m = Market(panel)
-    fwd, _ = forward_return_wide(m, 7, delist)
+    def _indep(c):
+        """Independent return of every coin from the close of c to the LAST traded close within the next 7 days
+        (a held coin that disappears is valued at its last traded price)."""
+        seg = m.close.loc[c + pd.Timedelta(days=1): c + pd.Timedelta(days=7)]
+        last = seg.ffill().iloc[-1] if len(seg) else pd.Series(np.nan, index=m.close.columns)
+        return last / m.close.loc[c] - 1.0
     off = pd.Timedelta(days=offset)
     gross_bad, turn_bad, cost_bad, net_bad, missing_px = 0, 0, 0, 0, 0
     ratios = []
@@ -82,9 +87,9 @@ def review(weights, log, panel, universe, cost_bps=15.0, cap=None, offset=1, del
         prev_w, prev_r, prev_g = None, None, None
         for d in wa.index:
             c = d - off
-            if c not in fwd.index:
+            if c not in m.close.index:
                 continue
-            r = fwd.loc[c].reindex(wa.columns)
+            r = _indep(c).reindex(wa.columns)
             w = wa.loc[d]
             held = w.abs() > 1e-12
             if r[held].isna().any():
